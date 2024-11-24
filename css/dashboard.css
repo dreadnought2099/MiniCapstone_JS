@@ -1,3 +1,4 @@
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,33 +7,41 @@
   font-weight: 400;
   font-style: normal;
 }
+
+/* Body Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   display: flex;
   height: 100vh;
   background-color: #f4f4f9;
+  overflow: hidden; /* Prevent horizontal scroll */
 }
 
+/* Sidebar Styling */
 .sidebar {
   width: 250px;
-  background-color: #2c3e50;
+  background-color: #1c325b;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Keep it fixed on the left */
+  height: 100%;
 }
 
 .sidebar h2 {
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center; /* Center the title */
 }
 
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 .sidebar ul li {
@@ -44,30 +53,38 @@ body {
   text-decoration: none;
   font-size: 18px;
   display: block;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease; /* Smooth hover effect */
 }
 
 .sidebar ul li a:hover {
-  color: #3498db;
+  background-color: #3498db51;
 }
 
 .logout {
-  background-color: #e74c3c;
+  background-color: #6a669d;
   color: white;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 4px;
+  text-align: center;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 .logout:hover {
-  background-color: #c0392b;
+  background-color: #646286;
 }
 
+/* Content Section */
 .content {
   flex-grow: 1;
   padding: 20px;
+  margin-left: 250px; /* Account for the sidebar's width */
   overflow-y: auto;
+  width: calc(100% - 250px); /* Make sure content fits the remaining space */
 }
 
 .content h1 {
@@ -75,12 +92,7 @@ body {
   margin-bottom: 20px;
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
+/* Word and Trivia Sections */
 .word-section,
 .trivia-section {
   background-color: white;
@@ -103,32 +115,74 @@ button {
 }
 
 button {
-  background-color: #2c3e50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #2c3e50d1;
+#word-search-btn {
+  background-color: #9abf80;
+}
+
+#word-search-btn:hover {
+  background-color: #809770;
 }
 
 .answer-btn {
   margin-right: 10px;
+  background-color: #6a669d;
+}
+
+.answer-btn:hover {
+  background-color: #656384;
 }
 
 #skip-trivia-btn {
-  background-color: #e6c767;
+  background-color: #ffb200;
 }
+
+#skip-trivia-btn:hover {
+  background-color: #cba559;
+}
+
+#new-trivia-btn {
+  background-color: #9abf80;
+}
+
+#new-trivia-btn:hover {
+  background-color: #809770;
+}
+
 .hidden {
   display: none;
 }
 
+/* Output Section */
 #word-output,
 #trivia-output {
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 4px;
   margin-top: 20px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .content {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+  }
+
+  .sidebar ul li a {
+    font-size: 16px;
+  }
 }
