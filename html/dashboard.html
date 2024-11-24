@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dictionary & Trivia Generator</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="icon" href="../image/image.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li><a href="#" id="nav-word">Word Lookup</a></li>
+        <li><a href="#" id="nav-trivia">Trivia Game</a></li>
+      </ul>
+      <button type="button" id="logout-btn" class="logout">Logout</button>
+    </div>
+
+    <div class="content">
+      <h1>Dictionary & Trivia Generator</h1>
+
+      <div class="app">
+        <!-- Word Lookup Section -->
+        <div id="word-section" class="section hidden">
+          <h2>Word Lookup</h2>
+          <input type="text" id="word-input" placeholder="Enter a word..." />
+          <button id="word-search-btn">Search</button>
+          <div id="word-output">
+            <p>Search for a word to see the result here.</p>
+          </div>
+        </div>
+
+        <!-- Trivia Section -->
+        <div id="trivia-section" class="section hidden">
+          <h2>Trivia Game</h2>
+          <button id="new-trivia-btn" type="button">Get New Trivia</button>
+          <div id="trivia-output">
+            <p>Click the button to load a trivia question!</p>
+          </div>
+          <button id="skip-trivia-btn" type="button" class="hidden">
+            Skip
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>
