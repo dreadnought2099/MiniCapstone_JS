@@ -1,4 +1,3 @@
-/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +6,6 @@
   font-weight: 400;
 }
 
-/* Body Styling */
 body {
   display: flex;
   height: 100vh;
@@ -39,6 +37,7 @@ body {
   font-size: 24px;
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 13px;
 }
 
 .sidebar ul {
@@ -61,7 +60,26 @@ body {
 }
 
 .sidebar ul li a:hover {
-  background-color: rgba(52, 152, 219, 0.3); /* Smooth hover effect */
+  background-color: rgba(52, 152, 219, 0.3);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  gap: 15px; /* Add spacing between the button and heading */
+  padding: 10px 0; /* Adjust padding as needed */
+}
+
+/* h2 Adjustment */
+.sidebar-header h2 {
+  font-size: 24px; /* Ensure consistent size */
+  flex-grow: 1; /* Take remaining space for alignment */
+  color: white; /* Match sidebar color */
+}
+
+.sidebar:not(.visible) + .content {
+  margin-left: 60px;
+  width: calc(100% - 60px);
 }
 
 .logout {
@@ -80,7 +98,7 @@ body {
   background-color: #646286;
 }
 
-/* Burger Button Styling */
+/* Burger Button Styles */
 .burger-btn {
   position: fixed;
   top: 20px;
@@ -91,24 +109,23 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 5px;
-  background: none; /* No background color */
+  background: none;
   border: none;
   cursor: pointer;
-  z-index: 1000; /* Keep above sidebar */
+  z-index: 1000;
+  transition: left 0.3s ease;
 }
 
-/* Default Bar Styling */
 .burger-bar {
   width: 100%;
   height: 4px;
-  background-color: #1c325b; /* Dark blue for better visibility */
+  background-color: #1c325b;
   border-radius: 4px;
   transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
-/* Change Color When Active */
 .burger-btn.active .burger-bar {
-  background-color: #1c325b; /* Retain color or adjust as needed */
+  background-color: #1c325b;
 }
 
 .content {
@@ -117,6 +134,7 @@ body {
   margin-left: 250px;
   overflow-y: auto;
   width: calc(100% - 250px);
+  transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 .content h1 {
@@ -124,7 +142,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* Section Styling */
+/* Section Styles */
 .section {
   background-color: white;
   padding: 20px;
@@ -151,7 +169,6 @@ button {
   cursor: pointer;
 }
 
-/* Buttons */
 #word-search-btn {
   background-color: #9abf80;
 }
@@ -185,7 +202,6 @@ button {
   background-color: #809770;
 }
 
-/* Output Section */
 #word-output,
 #trivia-output {
   background-color: #f9f9f9;
@@ -194,7 +210,6 @@ button {
   margin-top: 20px;
 }
 
-/* Hidden Class */
 .hidden {
   display: none;
 }

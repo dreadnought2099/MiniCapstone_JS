@@ -1,15 +1,27 @@
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   const burgerBtn = document.getElementById("toggle-btn");
+  const content = document.querySelector(".content"); // Select the content element
 
+  // Toggle sidebar visibility
   sidebar.classList.toggle("visible");
   burgerBtn.classList.toggle("active");
 
-  // Optional: Dynamically adjust burger bar color based on sidebar visibility
+  // Adjust content layout dynamically
+  if (sidebar.classList.contains("visible")) {
+    content.style.marginLeft = "270px"; // Match sidebar width + spacing
+    content.style.width = "calc(100% - 270px)";
+  } else {
+    content.style.marginLeft = "60px"; // Adjust for spacing when sidebar is hidden
+    content.style.width = "calc(100% - 60px)";
+  }
+
+  // Dynamically adjust burger bar color based on sidebar visibility
   const bars = burgerBtn.querySelectorAll(".burger-bar");
-  const color = sidebar.classList.contains("visible") ? "#f4f4f9" : "#1c325b";
   bars.forEach((bar) => {
-    bar.style.backgroundColor = color;
+    bar.style.backgroundColor = sidebar.classList.contains("visible")
+      ? "#f4f4f9"
+      : "#1c325b";
   });
 }
 
