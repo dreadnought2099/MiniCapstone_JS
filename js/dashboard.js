@@ -1,3 +1,18 @@
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const burgerBtn = document.getElementById("toggle-btn");
+
+  sidebar.classList.toggle("visible");
+  burgerBtn.classList.toggle("active");
+
+  // Optional: Dynamically adjust burger bar color based on sidebar visibility
+  const bars = burgerBtn.querySelectorAll(".burger-bar");
+  const color = sidebar.classList.contains("visible") ? "#f4f4f9" : "#1c325b";
+  bars.forEach((bar) => {
+    bar.style.backgroundColor = color;
+  });
+}
+
 // Function to toggle visibility of sections
 function showSection(sectionToShowId) {
   // Get all sections
@@ -39,15 +54,15 @@ function displayWordDefinition(data) {
   const phonetics = wordData.phonetics
     .map((phonetic) => {
       return `
-        <p>
-          <strong>Text:</strong> ${phonetic.text || "N/A"} <br>
-          ${
-            phonetic.audio
-              ? `<audio controls src="${phonetic.audio}"></audio>`
-              : "Audio unavailable"
-          }
-        </p>
-      `;
+          <p>
+            <strong>Text:</strong> ${phonetic.text || "N/A"} <br>
+            ${
+              phonetic.audio
+                ? `<audio controls src="${phonetic.audio}"></audio>`
+                : "Audio unavailable"
+            }
+          </p>
+        `;
     })
     .join("");
 
@@ -57,22 +72,22 @@ function displayWordDefinition(data) {
         .map(
           (definition) =>
             `<li>
-              <strong>Definition:</strong> ${definition.definition}<br>
-              ${
-                definition.example
-                  ? `<strong>Example:</strong> ${definition.example}`
-                  : ""
-              }
-            </li>`
+                <strong>Definition:</strong> ${definition.definition}<br>
+                ${
+                  definition.example
+                    ? `<strong>Example:</strong> ${definition.example}`
+                    : ""
+                }
+              </li>`
         )
         .join("");
 
       return `
-        <div>
-          <p><strong>Part of Speech:</strong> ${meaning.partOfSpeech}</p>
-          <ul>${definitions}</ul>
-        </div>
-      `;
+          <div>
+            <p><strong>Part of Speech:</strong> ${meaning.partOfSpeech}</p>
+            <ul>${definitions}</ul>
+          </div>
+        `;
     })
     .join("");
 
@@ -81,27 +96,27 @@ function displayWordDefinition(data) {
     .join(", ");
 
   document.getElementById("word-output").innerHTML = `
-    <h2>${word.toUpperCase()}</h2>
-    <div>
-      <h3>Phonetics</h3>
-      ${phonetics}
-    </div>
-    <div>
-      <h3>Meanings</h3>
-      ${meanings}
-    </div>
-    <div>
-      <h3>Source</h3>
-      ${sourceUrls}
-    </div>
-  `;
+      <h2>${word.toUpperCase()}</h2>
+      <div>
+        <h3>Phonetics</h3>
+        ${phonetics}
+      </div>
+      <div>
+        <h3>Meanings</h3>
+        ${meanings}
+      </div>
+      <div>
+        <h3>Source</h3>
+        ${sourceUrls}
+      </div>
+    `;
 }
 
 // Fetch trivia question
 async function fetchTriviaQuestion() {
   try {
     const response = await fetch(
-      "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple"
+      "https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple"
     );
     const data = await response.json();
 
@@ -127,24 +142,24 @@ function displayTriviaQuestion(question) {
   skipButton.classList.remove("hidden");
 
   // Prepare answers
-  const answers = [
-    ...question.incorrect_answers,
-    question.correct_answer,
-  ].sort();
+  const answers = [...question.incorrect_answers, question.correct_answer].sort(
+    () => Math.random() - 0.5
+  ); // Shuffle answers
 
   // Display trivia question and answers
   triviaOutput.innerHTML = `
-    <h3>${question.question}</h3>
-    ${answers
-      .map(
-        (answer) =>
-          `<button class="answer-btn" type="button" onclick="checkTriviaAnswer('${answer}', '${question.correct_answer}')">${answer}</button>`
-      )
-      .join("")}
-  `;
+      <h3>${question.question}</h3>
+      ${answers
+        .map(
+          (answer) =>
+            `<button class="answer-btn" type="button" onclick="checkTriviaAnswer('${answer}', '${question.correct_answer}')">${answer}</button>`
+        )
+        .join("")}
+    `;
 
   // Bind Skip button to fetch a new question
   skipButton.onclick = () => {
+    document.getElementById("skip-trivia-btn").classList.add("hidden");
     fetchTriviaQuestion();
   };
 }
@@ -166,6 +181,11 @@ function checkTriviaAnswer(selected, correct) {
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize the Word Lookup section as visible
   showSection("word-section");
+
+  // Attach event listener to burger button
+  document
+    .getElementById("toggle-btn")
+    .addEventListener("click", toggleSidebar);
 
   // Navigation setup
   document.getElementById("nav-word").addEventListener("click", (event) => {
