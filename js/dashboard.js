@@ -1,22 +1,19 @@
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   const burgerBtn = document.getElementById("toggle-btn");
-  const content = document.querySelector(".content"); // Select the content element
+  const content = document.querySelector(".content");
 
-  // Toggle sidebar visibility
   sidebar.classList.toggle("visible");
   burgerBtn.classList.toggle("active");
 
-  // Adjust content layout dynamically
   if (sidebar.classList.contains("visible")) {
-    content.style.marginLeft = "270px"; // Match sidebar width + spacing
+    content.style.marginLeft = "270px";
     content.style.width = "calc(100% - 270px)";
   } else {
-    content.style.marginLeft = "60px"; // Adjust for spacing when sidebar is hidden
+    content.style.marginLeft = "60px";
     content.style.width = "calc(100% - 60px)";
   }
 
-  // Dynamically adjust burger bar color based on sidebar visibility
   const bars = burgerBtn.querySelectorAll(".burger-bar");
   bars.forEach((bar) => {
     bar.style.backgroundColor = sidebar.classList.contains("visible")
@@ -25,24 +22,19 @@ function toggleSidebar() {
   });
 }
 
-// Function to toggle visibility of sections
 function showSection(sectionToShowId) {
-  // Get all sections
   const sections = document.querySelectorAll(".section");
 
-  // Hide all sections first
   sections.forEach((section) => {
     section.classList.add("hidden");
   });
 
-  // Show the requested section
   const sectionToShow = document.getElementById(sectionToShowId);
   if (sectionToShow) {
     sectionToShow.classList.remove("hidden");
   }
 }
 
-// Fetch word definition
 async function fetchWordDefinition(word) {
   try {
     const response = await fetch(
@@ -59,7 +51,6 @@ async function fetchWordDefinition(word) {
   }
 }
 
-// Display the word definition
 function displayWordDefinition(data) {
   const wordData = data[0];
   const word = wordData.word;
@@ -141,7 +132,7 @@ async function fetchTriviaQuestion() {
     document.getElementById(
       "trivia-output"
     ).innerHTML = `<p>Error loading trivia. Try again!</p>`;
-    console.error(error); // Log error for debugging
+    console.error(error);
   }
 }
 
@@ -156,7 +147,7 @@ function displayTriviaQuestion(question) {
   // Prepare answers
   const answers = [...question.incorrect_answers, question.correct_answer].sort(
     () => Math.random() - 0.5
-  ); // Shuffle answers
+  );
 
   // Display trivia question and answers
   triviaOutput.innerHTML = `
@@ -169,7 +160,6 @@ function displayTriviaQuestion(question) {
         .join("")}
     `;
 
-  // Bind Skip button to fetch a new question
   skipButton.onclick = () => {
     document.getElementById("skip-trivia-btn").classList.add("hidden");
     fetchTriviaQuestion();
@@ -191,15 +181,12 @@ function checkTriviaAnswer(selected, correct) {
 
 // Event Listeners for navigation and actions
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize the Word Lookup section as visible
   showSection("word-section");
 
-  // Attach event listener to burger button
   document
     .getElementById("toggle-btn")
     .addEventListener("click", toggleSidebar);
 
-  // Navigation setup
   document.getElementById("nav-word").addEventListener("click", (event) => {
     event.preventDefault();
     showSection("word-section");
@@ -210,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showSection("trivia-section");
   });
 
-  // Event listeners for specific actions
   document
     .getElementById("new-trivia-btn")
     .addEventListener("click", fetchTriviaQuestion);
@@ -221,11 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter a word!");
       return;
     }
-    fetchWordDefinition(word); // Call the function to fetch word data
+    fetchWordDefinition(word);
   });
 
   document.getElementById("logout-btn").addEventListener("click", () => {
     alert("You have logged out successfully!");
-    window.location.href = "../index.html"; // Replace with the actual login page
+    window.location.href = "../index.html";
   });
 });
