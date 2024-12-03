@@ -115,7 +115,6 @@ function displayWordDefinition(data) {
     `;
 }
 
-// Fetch trivia question
 async function fetchTriviaQuestion() {
   try {
     const response = await fetch(
@@ -144,7 +143,6 @@ function displayTriviaQuestion(question) {
   // Show the Skip button
   skipButton.classList.remove("hidden");
 
-  // Prepare answers
   const answers = [...question.incorrect_answers, question.correct_answer].sort(
     () => Math.random() - 0.5
   );
@@ -179,7 +177,6 @@ function checkTriviaAnswer(selected, correct) {
   document.getElementById("skip-trivia-btn").classList.add("hidden");
 }
 
-// Event Listeners for navigation and actions
 document.addEventListener("DOMContentLoaded", () => {
   showSection("word-section");
 
@@ -211,7 +208,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("logout-btn").addEventListener("click", () => {
-    alert("You have logged out successfully!");
-    window.location.href = "../index.html";
+    const userConfirmed = window.confirm("Are you sure you want to log out?");
+    if (userConfirmed) {
+      // alert("You have logged out successfully!");
+      window.location.href = "../index.html";
+    }
   });
 });
